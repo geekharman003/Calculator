@@ -21,6 +21,8 @@ let equalBtn = document.querySelector(".equal-btn");
 let dotBtn = document.querySelector(".dot-btn");
 
 let str = "";
+let evaluatedStr = "";
+let operators = ["+", "-", "*", "/", "%"];
 let duplicateStr = "";
 let dotCount = 0;
 
@@ -91,41 +93,107 @@ btns.forEach((btn) => {
 
 btns.forEach(function (btn) {
   btn.addEventListener("click", function (e) {
-    handleInput(e);
-    if (e.target.textContent === "=") {
-      if ((input.value === "")) {
-        return;
+    if (
+      e.target.textContent === "+" ||
+      e.target.textContent === "-" ||
+      e.target.textContent === "/" ||
+      e.target.textContent === "*" ||
+      e.target.textContent === "%"
+    ) {
+      handleMultipleOperators(e);
+    } else if (e.target.textContent === ".") {
+      handleMultipleDots(e);
+    } else if (e.target.textContent === "=") {
+      resultContainer.style.display = "block";
+      if (str[str.length - 2] === "/" && str[str.length - 1] === "0") {
+        resultContainer.textContent = "Cannot be Divided by 0";
       } else {
-        duplicateStr = str;
-        str = eval(str);
-        input.value = str
-        resultContainer.style.display = "block";
-        resultContainer.textContent = duplicateStr;
+        evaluatedStr = eval(str);
+        resultContainer.textContent = evaluatedStr;
+        input.value = str;
       }
+    } else if (e.target.textContent === "C") {
+      str = str.slice(0, str.length - 1);
+      input.value = str;
     } else if (e.target.textContent === "AC") {
       str = "";
       input.value = "";
-      resultContainer.style.display = "none";
-    } else if (e.target.textContent === "C") {
-      str = str.slice(0, duplicateStr.length - 1);
-      input.value = str;
+      resultContainer.textContent = "";
     } else {
-      input.value = "";
-      // console.log(input.value)
       str = str + e.target.textContent;
       input.value = str;
-      resultContainer.style.display = "none";
     }
+
+    // if (e.target.textContent === "=") {
+    //     if (input.value === "") {
+    //       return;
+    //     } else {
+    //       duplicateStr = str;
+    //       str = eval(str);
+    //       input.value = str;
+    //       resultContainer.style.display = "block";
+    //       resultContainer.textContent = duplicateStr;
+    //     }
+    //   } else if (e.target.textContent === "AC") {
+    //     str = "";
+    //     input.value = "";
+    //     resultContainer.style.display = "none";
+    //   } else if (e.target.textContent === "C") {
+    //     str = str.slice(0, duplicateStr.length - 1);
+    //     input.value = str;
+    //   } else {
+    //     input.value = "";
+    //     // console.log(input.value)
+    //     str = str + e.target.textContent;
+    //     input.value = str;
+    //     resultContainer.style.display = "none";
+    //   }
   });
 });
 
-function handleInput(e) {
-  if (e.target.textContent === "." ) {
-    console.log(dotCount);
-    if (dotCount >= 0) {
-      e.target.setAttribute("disabled", null);
-    } else {
-      dotCount++;
+// handling multiple Operators
+
+let lastChar;
+let atLeastOneIncluded = undefined;
+function handleMultipleOperators(e) {
+  lastChar = [str[str.length - 1]];
+  atLeastOneIncluded = operators.some((element) => lastChar.includes(element));
+  if (atLeastOneIncluded) {
+    if (
+      e.target.textContent === "+" ||
+      e.target.textContent === "-" ||
+      e.target.textContent === "*" ||
+      e.target.textContent === "/" ||
+      e.target.textContent === "%"
+    ) {
+      return;
     }
+  } else if (str === "") {
+    if (
+      e.target.textContent === "+" ||
+      e.target.textContent === "-" ||
+      e.target.textContent === "*" ||
+      e.target.textContent === "/" ||
+      e.target.textContent === "%"
+    ) {
+      return;
+    }
+  } else {
+    str = str + e.target.textContent;
+    input.value = str;
+  }
+}
+
+//handling multiple Dots
+
+function handleMultipleDots(e) {
+  if (str === "" && e.target.textContent === ".") {
+    str = str + "0.";
+    input.value = str;
+  } else if (str[str.length - 1] === "." && e.target.textContent === ".") {
+    return;
+  } else {
+    str = str + e.target.textContent;
+    input.value = str;
   }
 }
