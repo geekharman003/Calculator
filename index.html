@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator App</title>
+    <link
+      type="image/png"
+      sizes="32x32"
+      rel="icon"
+      href="images/icons8-calculator-32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="card-container">
+      <div class="upper-screen">
+        <div class="dark-light-mode-container">
+          <p>Calc</p>
+          <div class="icon-container">
+            <span class="icon dark-icon">
+              <i class="lni lni-moon-half-right-5 lni-flip-x"></i>
+            </span>
+            <span class="icon light-icon"> <i class="lni lni-sun-1"></i> </span>
+          </div>
+        </div>
+         <div class="result-container"></div>
+        <input type="text" autofocus id="calculations-input" />
+       
+      </div>
+      <div class="lower-screen">
+        <button class="btn animate__animated blue-btns">AC</button>
+        <button class="btn animate__animated blue-btns">C</button>
+        <button class="btn animate__animated blue-btns">%</button>
+        <button class="btn animate__animated red-btns">/</button>
+        <button class="btn animate__animated">7</button>
+        <button class="btn animate__animated">8</button>
+        <button class="btn animate__animated">9</button>
+        <button class="btn animate__animated red-btns">*</button>
+        <button class="btn animate__animated">4</button>
+        <button class="btn animate__animated">5</button>
+        <button class="btn animate__animated">6</button>
+        <button class="btn animate__animated red-btns">-</button>
+        <button class="btn animate__animated">1</button>
+        <button class="btn animate__animated">2</button>
+        <button class="btn animate__animated">3</button>
+        <button class="btn animate__animated red-btns">+</button>
+        <button class="btn animate__animated zero-btn">0</button>
+        <button class="btn animate__animated dot-btn">.</button>
+        <button class="btn animate__animated equal-btn">=</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
